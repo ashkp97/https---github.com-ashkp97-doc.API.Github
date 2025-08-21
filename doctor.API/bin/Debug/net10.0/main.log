@@ -1,0 +1,28 @@
+2025-08-21 15:01:35,034 [2] INFO Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5243
+2025-08-21 15:01:35,056 [2] INFO Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+2025-08-21 15:01:35,056 [2] INFO Microsoft.Hosting.Lifetime - Hosting environment: Development
+2025-08-21 15:01:35,056 [2] INFO Microsoft.Hosting.Lifetime - Content root path: C:\Users\Administrator\source\repos\webapis\doctor.API\doctor.API
+2025-08-21 15:01:59,251 [.NET TP Worker] WARN Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware - Failed to determine the https port for redirect.
+2025-08-21 15:02:00,976 [.NET TP Worker] WARN Microsoft.EntityFrameworkCore.Model.Validation - Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-08-21 15:02:07,071 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (130ms) [Parameters=[p0='17'], CommandType='Text', CommandTimeout='30']
+proc_LoginGet @p0
+2025-08-21 15:02:39,732 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (6ms) [Parameters=[@__Key_0='103'], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [d].[DepartmentNumber], [d].[Name]
+FROM [Departments] AS [d]
+WHERE [d].[DepartmentNumber] = @__Key_0
+2025-08-21 15:02:39,786 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (6ms) [Parameters=[@__name_0='Akshay' (Size = 100)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [d].[Id], [d].[DepartmentId], [d].[IsSenior], [d].[Name], [d].[PhoneNumber], [d].[YearsOfExperience]
+FROM [Doctors] AS [d]
+WHERE [d].[Name] = @__name_0
+2025-08-21 15:02:40,015 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (24ms) [Parameters=[@p0='103', @p1='True', @p2='Akshay' (Nullable = false) (Size = 100), @p3=NULL (Size = 4000), @p4='28'], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Doctors] ([DepartmentId], [IsSenior], [Name], [PhoneNumber], [YearsOfExperience])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-08-21 15:02:40,061 [.NET TP Worker] INFO Doctor - Doctor Added with Id 19
+2025-08-21 15:02:40,098 [.NET TP Worker] INFO Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (23ms) [Parameters=[@p0='19', @p1='0xC8A4FC50D877E5F0C1E4E4D92F72AA0E3E63ED76F7F9634CF1B0C8B9660A47EC...' (Nullable = false) (Size = 8000), @p2='0xA807D212FCB6A94499C47BC3E5F93F71FB9FC26E6FAEF459AC9F019958045F49' (Nullable = false) (Size = 8000), @p3='Doctor' (Nullable = false) (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([UserId], [Key], [Password], [Role])
+VALUES (@p0, @p1, @p2, @p3);

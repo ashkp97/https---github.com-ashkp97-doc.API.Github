@@ -40,6 +40,18 @@ public class DoctorRepoTest
     }
 
     // [Test]
+    // [TestCase(104, null, 4)]
+    // public async Task AddEmployeeExceptionTest(int departmentId, string? name, int did)
+    // {
+    //     //Arrange            
+    //     var doc = new Doctor { Name = name, PhoneNumber = "1234567890", DepartmentId = departmentId };
+    //     await docRepo.Add(doc);
+    //     //Assert
+    //     Assert.ThrowsAsync<DbUpdateException>(async () => await docRepo.Add(doc));
+    // }
+
+
+    // [Test]
     // [TestCase(110, null)]
     // public async Task AddEmployeeFailureTest(int departmentId, string? name)
     // {

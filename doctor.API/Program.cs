@@ -60,6 +60,7 @@ builder.Services.AddScoped<ILoginSP, LoginSP>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
+builder.Logging.AddLog4Net();
 //Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

@@ -9,16 +9,19 @@ public class DoctorService : IDoctorService
     private readonly IRepository<int, Department> _deptRepo;
     private readonly IRepository<int, User> _userRepo;
     private readonly IMapper _mapper;
+    private readonly ILogger<Doctor> _logger;
 
     public DoctorService(IRepository<int, Doctor> docRepo,
                          IRepository<int, Department> deptRepo,
                          IMapper mapper,
-                         IRepository<int, User> userRepo)
+                         IRepository<int, User> userRepo,
+                         ILogger<Doctor> logger)
     {
         _docRepo = docRepo;
         _deptRepo = deptRepo;
         _userRepo = userRepo;
         _mapper = mapper;
+        _logger = logger;
     }
     public async Task<AddDoctorResponseDto> AddNewDoctor(AddDoctorRequestDto doctor)
     {
@@ -32,6 +35,7 @@ public class DoctorService : IDoctorService
         if (dbDoctor.YearsOfExperience > 20)
             dbDoctor.IsSenior = true;
         dbDoctor = await _docRepo.Add(dbDoctor);
+        _logger.LogInformation($"Doctor Added with Id {dbDoctor.Id}");
 
          User user = new User();
         user.UserId = dbDoctor.Id;

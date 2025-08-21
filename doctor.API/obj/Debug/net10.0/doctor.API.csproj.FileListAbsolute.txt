@@ -157,3 +157,6 @@ C:\Users\Administrator\source\repos\webapis\doctor.API\doctor.API\bin\Debug\net1
 C:\Users\Administrator\source\repos\webapis\doctor.API\doctor.API\bin\Debug\net10.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Administrator\source\repos\webapis\doctor.API\doctor.API\obj\Debug\net10.0\doctor.API.sourcelink.json
 C:\Users\Administrator\source\repos\webapis\doctor.API\doctor.API\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Administrator\source\repos\webapis\doctor.API\doctor.API\bin\Debug\net10.0\log4net.config
+C:\Users\Administrator\source\repos\webapis\doctor.API\doctor.API\bin\Debug\net10.0\log4net.dll
+C:\Users\Administrator\source\repos\webapis\doctor.API\doctor.API\bin\Debug\net10.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll

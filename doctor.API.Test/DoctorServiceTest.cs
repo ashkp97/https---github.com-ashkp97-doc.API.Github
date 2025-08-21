@@ -1,6 +1,7 @@
 using AutoMapper;
 using doctor.API.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace doctor.API.Test;
@@ -31,45 +32,39 @@ public class DoctorServiceTest
     [TestCase(103, "Test6", 3)]
     public async Task AddEmployeeSuccessTest(int departmentId, string name, int did)
     {
+        //Arrange    
         _context.Add(new Department { DepartmentNumber = departmentId, Name = "Test" });
         await _context.SaveChangesAsync();
-        //Arrange    
         var reqObj = new AddDoctorRequestDto { Name = name, Phone = "1234567890", DepartmentId = departmentId };
         var respObj = new AddDoctorResponseDto { Id = did, Name = name, Phone = "1234567890", DepartmnetName = "Test" };
         var doc = new Doctor { Name = name, PhoneNumber = "1234567890", DepartmentId = departmentId };
         Mock<IMapper> mapper = new Mock<IMapper>();
         mapper.Setup(mapper => mapper.Map<Doctor>(It.IsAny<AddDoctorRequestDto>())).Returns(doc);
         mapper.Setup(mapper => mapper.Map<AddDoctorResponseDto>(It.IsAny<Doctor>())).Returns(respObj);
-        IDoctorService docService = new DoctorService(docRepo, deptRepo, mapper.Object, userRepo);
+        Mock<ILogger<Doctor>> logger = new Mock<ILogger<Doctor>>();
+        
+        IDoctorService docService = new DoctorService(docRepo, deptRepo, mapper.Object, userRepo, logger.Object);
         //Action        
         var result = await docService.AddNewDoctor(reqObj);
         //Assert
         Assert.That(result.Id, Is.EqualTo(did));
     }
 
-    // [Test]
-    // [TestCase(110, null)]
-    // public async Task AddEmployeeFailureTest(int departmentId, string? name)
-    // {
-    //      //Arrange        
-    //     IRepository<int, Doctor> docRepo = new DoctorRepositoryDBContext(_context);
-    //     var doc = new Doctor { Name = name, PhoneNumber = "1234567890", DepartmentId = departmentId };
-    //     //Action        
-    //     //var result = await docRepo.Add(doc);
-    //     var ex = Assert.ThrowsAsync<DbUpdateException>(async () => await docRepo.Add(doc));
-    //     //Assert
-    //     Assert.That(ex.Message, Does.Contain("Required properties '{'Name'}' are missing for the instance of entity type 'Doctor'."));
-    // }
-    // [Test]
-    // public async Task AddEmployeeExceptionTest()
-    // {
-    //     //Arrange
+    [Test]
+    [TestCase(104, "Test4", 4)]
+    public async Task AddEmployeeExceptionTest(int departmentId, string name, int did)
+    {
+        //Arrange    
+        _context.Add(new Department { DepartmentNumber = departmentId, Name = "Test" });
+        await _context.SaveChangesAsync();
+        var reqObj = new AddDoctorRequestDto { Name = name, Phone = "1234567890", DepartmentId = departmentId };
+        Mock<IMapper> mapper = new Mock<IMapper>();
+        Mock<ILogger<Doctor>> logger = new Mock<ILogger<Doctor>>();
 
-    //     //Action
-
-    //     //Assert
-
-    // }
+        IDoctorService docService = new DoctorService(docRepo, deptRepo, mapper.Object, userRepo, logger.Object);
+        //Assert
+        Assert.ThrowsAsync<NullReferenceException>(async () => await docService.AddNewDoctor(reqObj));
+    }
 
     [TearDown]
     public void TearDown()
